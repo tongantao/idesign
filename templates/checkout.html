@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="container">
+	<div class="check-out">
+		<h1>购物车</h1>
+    	  <table >
+		  <tr>
+			<th>商品</th>
+			<th>数量</th>
+			<th></th>
+           <th></th>
+			<th>价格</th>
+		  </tr>
+          {% for item in cart.items %}
+		  <tr>
+			<td class="ring-in"><a href="{% url 'detail' %}?did={{ item.clothing.id }}" class="at-in"><img src="{{ MEDIA_URL }}{{ item.clothing.image_url_c }}" class="img-responsive" alt=""></a>
+			<div class="sed">
+				<h5>{{ item.clothing.name }}</h5>
+				<p>{{ item.clothing.desc }}</p>
+			</div>
+			<div class="clearfix"> </div></td>
+			<td class="check"><input type="text" value="{{ item.quantity }}" readonly="readonly"></td>
+			<td></td>
+			<td></td>
+			<td>{{ item.sum_price }}元</td>
+		  </tr>
+          {% endfor %}
+          <tr>
+          <td><a href="#" class=" to-buy">确认</a>
+          &nbsp;&nbsp;&nbsp;总价：{{ cart.total_price }}元</td>
+          </tr>
+	</table>
+{#	<a href="#" class=" to-buy">去结算</a>#}
+	<div class="clearfix"> </div>
+    </div>
+</div>
+{% endblock %}
+
